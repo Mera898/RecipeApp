@@ -13,6 +13,9 @@ const recipes = require("./routes/api/recipes");
 const path = require("path");
 
 
+const port = process.env.PORT || 5000;
+
+
 //Body=parser middleware
 
 app.use(bodyParser.urlencoded({
@@ -41,7 +44,6 @@ app.use(express.static(path.join(__dirname,"client","build")))
 
 
 
-const port = process.env.PORT || 5000;
 
 
 
