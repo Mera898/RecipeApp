@@ -3,6 +3,8 @@ const router = express.Router();
 //const bcrypt = require("bycryptjs");
 //const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
+const mongoose = require("mongoose")
+
 
 
 //Load input validation
@@ -17,10 +19,6 @@ const Recipe = require("../../models/Recipe");
 //@route POST api/recipes/add
 //@desc add recipe
 //@access Public
-
-
-
-
 router.post("/add",(req,res)=>{
     //Input validation
     console.log("This works!");
@@ -39,6 +37,7 @@ router.post("/add",(req,res)=>{
 
         }
         else{
+            console.log("adding new recipe");
             const newRecipe= new Recipe({
                 name : req.body.name,
                 recipeTitle : req.body.recipeTitle,
@@ -55,13 +54,23 @@ router.post("/add",(req,res)=>{
 
 });
 
+
 router.get("/",(req,res)=>{
-    Recipe.find({})
-    .toArray(function(err,result){
+    Recipe.find({}, function(err,items){
+        if(err) throw err;
+        console.log(items);
+        res.json(items);
+    });
+    /*.toArray(function(err,result){
         if(err) throw err;
         res.json(result);
-    });
+    });*/
 });
+
+
+
+
+
  
 /*router("/all").get(function(req, res) {
        Recipe.find({})
